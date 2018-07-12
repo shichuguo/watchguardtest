@@ -64,7 +64,7 @@ def get_performance_data(name_list,url):
     av = filter(None, [i.string.replace("\n", "").replace(" ", "") for i in performance_tag_list[2].next_siblings])
     ips = filter(None, [i.string.replace("\n", "").replace(" ", "") for i in performance_tag_list[3].next_siblings])
     utm = filter(None, [i.string.replace("\n", "").replace(" ", "") for i in performance_tag_list[4].next_siblings])
-    data = map(list, zip(firewall, vpn, av, ips, utm))
+    data = list(map(list, zip(firewall, vpn, av, ips, utm)))
     [data[name_list.index(name)].insert(0, name) for name in name_list]
     for i in data:
         if "Gbps" in i[1]:
