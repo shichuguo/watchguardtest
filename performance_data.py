@@ -49,6 +49,7 @@ def get_product_info():
 def get_performance_data(name_list,url):
     '''
     返回请过处理后可以字节写入文件的性能数据
+    :param name_list: 产品名称列表
     :param url: 对比页面url
     :return: 性能数据list
     '''
