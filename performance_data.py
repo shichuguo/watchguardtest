@@ -26,8 +26,8 @@ def get_compare_url(product_info):
     name_list = []
     id_list = []
     for i in compare_info:
-        name_list.append(i.keys()[0].split()[-1])
-        id_list.append(i.values()[0])
+        name_list.append(list(i.keys())[0].split()[-1])
+        id_list.append(list(i.values())[0])
     return name_list, URL+'/'+'/'.join(id_list)
 
 
@@ -71,7 +71,7 @@ def get_performance_data(name_list,url):
             i[1] = float(i[1].rstrip("Gbps"))
         elif "Mbps" in i[1]:
             i[1] = float(i[1].rstrip("Mbps"))/1000
-        data.sort(key=operator.itemgetter(1))
+    data.sort(key=operator.itemgetter(1))
     for i in data:
         if i[1] >= 1:
             i[1] = str(i[1])+"Gbps"
@@ -85,8 +85,8 @@ def main(csv_file):
     print("Comparison_url is: %s" % compare_url)
     data = get_performance_data(name_list, compare_url)
     data[0:0] = [HEADERS]
-    with open("./"+csv_file, "wb") as f:
-        csv.writer(f).writerows(data)
+    with open("./"+csv_file, "w", newline="") as f:
+        csv.writer(f, dialect= ("excel")).writerows(data)
 
 if __name__ == '__main__':
     if not sys.argv[1].endswith(".csv"):
